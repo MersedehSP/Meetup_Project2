@@ -18,7 +18,7 @@
         * Event Name</br>
         * Group Name</br>
         * Number of Attendees</br>
-        *Event link (directs you to that page)</br>
+        * Event link (directs you to that page)</br>
 - [x] Concatenate all the dataframes (final_meetup_df)</br>
 - [x] Modify the state and city of final_meetup_df dataframe to replace '-' with space; Title case the city; upper case the state;</br>
 - [x] Modify the state and city of top_cities_df dataframe to replace '-' with space; Title case the city; upper case the state;</br>
