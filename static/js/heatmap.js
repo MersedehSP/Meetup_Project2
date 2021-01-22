@@ -38,3 +38,9 @@ var myMap = L.map("map", {
   
   });
   
+
+  // Data needed from flask
+    // city_lat
+    // city_lng
+    // Retrieve all the unique city_lat and city_lng
+    // number of events for each city

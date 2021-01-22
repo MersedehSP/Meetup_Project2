@@ -2,10 +2,24 @@ body {
     padding: 0;
     margin: 0;
 }
-  
-#map,
-  body,
+
+body,
   html {
     height: 100%;
+
 }  
+
+.mapcontainer {
+    background-color: aqua;
+    
+
+}
+
+.container-fluid{
+    background-color: blue;
+}
+
+
+
+  
   
