@@ -1,26 +1,27 @@
 CREATE TABLE city (
-	id SERIAL PRIMARY KEY,
-	state VARCHAR NOT NULL,
 	city VARCHAR NOT NULL,
-	lat VARCHAR NOT NULL,
-	lng VARCHAR NOT NULL,
-	population INTEGER NOT NULL
+	state VARCHAR NOT NULL,
+	city_lat VARCHAR NOT NULL,
+	city_lng VARCHAR NOT NULL,
+	city_population INTEGER NOT NULL,
+	city_id INTEGER PRIMARY KEY
 );
 
 CREATE TABLE events (
 	id SERIAL PRIMARY KEY,
-	event_name VARCHAR(255) NOT NULL,
-	group_name VARCHAR(255) NOT NULL,
-	event_link VARCHAR(255) NOT NULL,
-	attendees_num INTEGER NOT NULL,
+	evt VARCHAR(255) NOT NULL,
+	grp VARCHAR(255) NOT NULL,
+	lnk VARCHAR(255) NOT NULL,
+	attendees INTEGER NOT NULL,
+	maploc VARCHAR(255) NOT NULL,
+	city VARCHAR NOT NULL,
+	subcity VARCHAR NOT NULL,
+	state VARCHAR NOT NULL,
+	street VARCHAR(255) NOT NULL,
+	subcity_lat FLOAT,
+	subcity_lng FLOAT,
 	city_id INTEGER,
-	map_link VARCHAR(255) NOT NULL,
-	event_city VARCHAR NOT NULL,
-	event_street VARCHAR(255) NOT NULL,
-	event_lat FLOAT,
-	event_lng FLOAT,
-	event_state VARCHAR,
-	FOREIGN KEY (city_id) REFERENCES city(id)
+	FOREIGN KEY (city_id) REFERENCES city(city_id)
 );
 
 SELECT * FROM city;
