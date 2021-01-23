@@ -21,7 +21,6 @@ CREATE TABLE events (
 	event_lng FLOAT,
 	address VARCHAR NOT NULL,
 	region_id INTEGER NOT NULL, 
-	activity_type VARCHAR(255) NOT NULL,
 	FOREIGN KEY (region_id) REFERENCES city(id)
 );
 
@@ -29,17 +28,17 @@ SELECT * FROM city;
 SELECT * FROM events;
 
 ---search for the food activities in Trenton 
-SELECT c.city,  e.event_name, e.event_city, e.address, e.activity_type
+SELECT c.city,  e.event_name, e.event_city, e.address
 FROM city as c
 Inner JOIN events AS e ON c.id = e.region_id
-WHERE activity_type LIKE ('food%') AND city = 'Trenton'
+WHERE  city = 'Trenton'
 
 -----
 SELECT 
-  COUNT('activity_type')
+  COUNT('event_city')
 FROM city as c
 Inner JOIN events AS e ON c.id = e.region_id
-WHERE city = 'Trenton'
+WHERE event_city = 'Skillman'
 
 -------------------------------------
 SELECT
