@@ -15,7 +15,8 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
-  var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
+var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
+
   
   d3.json(url, function(response) {
   
