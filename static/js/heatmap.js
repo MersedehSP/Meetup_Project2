@@ -1,9 +1,10 @@
-// Copied in sample code from class activities to test this out
+// Heatmap of all the MeetUp activities in the Tri-State Area
+// Need json file with latitude and longitude
 
 
 var myMap = L.map("map", {
     center: [40.2206, -74.7597],
-    zoom: 13
+    zoom: 7
   });
   
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -15,33 +16,23 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
-var url = "https://data.sfgov.org/resource/cuks-n6tp.json?$limit=10000";
+var link = "static/data/json_latlng.json";
 
-  
-  d3.json(url, function(response) {
-  
-    console.log(response);
+  // Getting lat and lng json data
+  d3.json(link, function(response) {    
   
     var heatArray = [];
   
-    for (var i = 0; i < response.length; i++) {
-      var location = response[i].location;
-  
-      if (location) {
-        heatArray.push([location.coordinates[1], location.coordinates[0]]);
+    for (var i = 0; i < Object.keys(response).length; i++) {
+      var x = response[i];
+      if (x) {
+        heatArray.push([x["lat"], x["lng"]]);
       }
     }
   
     var heat = L.heatLayer(heatArray, {
-      radius: 20,
-      blur: 35
+      radius: 30,
+      blur: 10
     }).addTo(myMap);
   
   });
-  
-
-  // Data needed from flask
-    // city_lat
-    // city_lng
-    // Retrieve all the unique city_lat and city_lng
-    // number of events for each city
