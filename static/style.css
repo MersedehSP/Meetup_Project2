@@ -1,0 +1,10 @@
+.container {
+    position:relative;
+    height:auto;
+    width:auto;
+    padding:0px;
+    margin:0px;
+    background-color: black;
+    text-align:center;
+    color:blue;
+}
