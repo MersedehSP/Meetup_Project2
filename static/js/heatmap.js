@@ -16,23 +16,22 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
-var link = "static/data/json_latlng.json";
+var link = "/static/data/json_latlng.json";
 
-  // Getting lat and lng json data
+
+  //Getting lat and lng json data
   d3.json(link, function(response) {    
-  
     var heatArray = [];
-  
     for (var i = 0; i < Object.keys(response).length; i++) {
       var x = response[i];
       if (x) {
         heatArray.push([x["lat"], x["lng"]]);
       }
     }
-  
     var heat = L.heatLayer(heatArray, {
       radius: 30,
       blur: 10
     }).addTo(myMap);
-  
   });
+
+  
