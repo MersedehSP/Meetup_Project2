@@ -7,21 +7,22 @@ class meetupCity(db.Model):
     id=db.Column(db.Integer, primary_key = True)
     state=db.Column(db.String())
     city=db.Column(db.String())
-    city_lat=db.Column(db.Float())
-    city_lng=db.Column(db.Float())
-    city_population=db.Column(db.String())
-    events = db.relationship('meetupEvents', backref='city_id', lazy=True)
+    lat=db.Column(db.Float())
+    lng=db.Column(db.Float())
+    population=db.Column(db.String())
+    children = db.relationship("meetupEvents", primaryjoin='meetupCity.id==meetupEvents.region_id')
     # One to Many Relationship
  
-    def __init__(self, state, city, city_lat, city_lng, city_population):
+    def __init__(self,id, state, city, lat, lng, population):
+        self.id = id
         self.city = city
         self.state = state
-        self.city_lat = city_lat
-        self.city_lng = city_lng
-        self.city_population=city_population
+        self.lat = lat
+        self.lng = lng
+        self.population=population
  
     def __repr__(self):
-        return f"{self.city}:{self.state}:{self.city_lat}:{self.city.lng}"
+        return f"{self.city}:{self.state}:{self.lat}:{self.lng}"
 
 class meetupEvents(db.Model):
     __tablename__ = 'events'
@@ -34,13 +35,15 @@ class meetupEvents(db.Model):
     event_state=db.Column(db.String())
     event_city=db.Column(db.String()) 
     event_street=db.Column(db.String())
-    Google_Map_Link=db.Column(db.String())
+    google_map_link=db.Column(db.String())
     event_lat=db.Column(db.Float())
     event_lng=db.Column(db.Float())
-    region_id = db.Column(db.Integer, db.ForeignKey('meetupCity.id'),nullable=False)
+    address=db.Column(db.String())
+    region_id = db.Column(db.Integer, db.ForeignKey(meetupCity.id),nullable=False)
 
-    def __init__(self: id, event_name, group_name, attendees, venue_event_link, event_state, event_city, event_street,
-                Google_Map_Link, event_lat, event_lng, region_id):
+    def __init__(self:id, event_name, group_name, attendees, venue_event_link, event_state, event_city, event_street, 
+                google_map_link, event_lat, event_lng, address, region_id):
+        self.id = id
         self.event_name = event_name
         self.group_name = group_name
         self.attendees = attendees
@@ -48,9 +51,10 @@ class meetupEvents(db.Model):
         self.event_state = event_state
         self.event_city = event_city
         self.event_street = event_street
-        self.Google_Map_Link = Google_Map_Link
+        self.google_map_link = google_map_link
         self.event_lat = event_lat
         self.event_lng = event_lng
+        self.address=address
         self.region_id = region_id
 
     def __repr__(self):
