@@ -1,37 +1,27 @@
-from flask import Flask, jsonify,render_template
+from flask_sqlalchemy import SQLAlchemy
+import sqlalchemy
 import psycopg2
-import numpy as np
-
-conn = psycopg2.connect(
-    host = "localhost", 
-    database = "MeetUp",
-    user = "postgres", 
-    password = "datachemistry" 
-
-)
-
-mycurser = conn.curser()
-
-app = Flask(__name__)
-
-
-@app.route("/",methods = ['post','get'])
-def welcome():
-    
-   return render_template('index.html')
-
-
-
-
-@app.route("/data", methods = ['post','get'])
-def names():
-    mycurser.execute("select * from city")
-    data = mycurser.fetchall()
-    data = list(np.ravel(data))
-
-
-    return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+from flask import Flask, render_template, jsonify
+from flask_migrate import Migrate
+from models import db, meetupCity, meetupEvents
  
+app = Flask(__name__)
+ 
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:datachemistry@localhost:5430/MeetUp"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+ 
+
+db.init_app(app)
+migrate = Migrate(app, db)
+ 
+#general Flask Code
+
+@app.route('/')
+def home():
+    print("In home")
+    print(meetupCity.query.all())
+    return render_template('index.html')
+
+if __name__=="__main__":
+    app.run(debug=True)
