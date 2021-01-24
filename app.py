@@ -47,32 +47,22 @@ def markerMap(city='All'):
     if (city=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.venue_event_link, meetupEvents.attendees, meetupEvents.google_map_link).all()
         result_dict=[]
-        for name, lat, lng, link, attendees, gmap in results:
-            record={}
-            record['name']=name
-            record['lat']=lat
-            record['lng']=lng
-            record['link']=link
-            record['attendees']=attendees
-            record['gmap']=gmap
-            result_dict.append(record)
-        session.close()
     else:
         results=session.query(meetupEvents.event_name, meetupEvents.event_lat,meetupEvents.event_lng, 
             meetupEvents.venue_event_link, meetupEvents.attendees, meetupEvents.google_map_link).\
             filter(meetupEvents.event_city==city).all()
 
-        result_dict=[]
-        for name, lat, lng, link, attendees, gmap in results:
-            record={}
-            record['name']=name
-            record['lat']=lat
-            record['lng']=lng
-            record['link']=link
-            record['attendees']=attendees
-            record['gmap']=gmap
-            result_dict.append(record)
-        session.close()        
+    result_dict=[]
+    for name, lat, lng, link, attendees, gmap in results:
+        record={}
+        record['name']=name
+        record['lat']=lat
+        record['lng']=lng
+        record['link']=link
+        record['attendees']=attendees
+        record['gmap']=gmap
+        result_dict.append(record)
+    session.close()        
     return jsonify(result_dict)
 
 @app.route('/citydropDown')
