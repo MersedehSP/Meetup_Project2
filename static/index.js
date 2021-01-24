@@ -1,3 +1,3 @@
-d3.json('/summary').then((response)=> {
+d3.json('/eventLocations').then((response)=> {
     console.log(response)
 })

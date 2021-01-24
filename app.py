@@ -26,23 +26,23 @@ def home():
 
     return render_template('index.html')
 
-@app.route('/summary')
-def summary():
+@app.route('/eventLocations')
+def eventLocations():
     session = Session(bind=engine)
-    results=session.query(meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.event_city, func.count(meetupEvents.event_name).label('total')).\
-                        group_by(meetupEvents.event_lat,meetupEvents.event_lng,meetupEvents.event_city).\
+#    results=session.query(meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.event_city, func.count(meetupEvents.event_name).label('total')).\
+#                        group_by(meetupEvents.event_lat,meetupEvents.event_lng,meetupEvents.event_city).\
+#                        order_by(meetupEvents.event_city).all()
+    results=session.query(meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.event_city).\
                         order_by(meetupEvents.event_city).all()
     result_dict=[]
-    for lat, lng, city, total in results:
+    for lat, lng, city in results:
         record={}
         record['city']=city
         record['lat']=lat
         record['lng']=lng
-        record['total']=total
         result_dict.append(record)
     session.close()
-#                        filter(meetupEvents.event_city==meetupCity.city).\
- 
+#  group_by(meetupEvents.event_lat,meetupEvents.event_lng,meetupEvents.event_city).\
     return jsonify(result_dict)
  
 
