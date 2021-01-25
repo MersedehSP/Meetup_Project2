@@ -20,7 +20,6 @@
 <body>
   <!-- Navigation Bar on Top Right -->
   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-
     <a class="navbar-brand" href="templates/index.html">Home Page</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,20 +43,67 @@
   <br>
   <br>
   
-  <table>
-    <tr>
-      <th>Month</th>
-      <th>Savings</th>
-    </tr>
-    <tr>
-      <td>January</td>
-      <td>$100</td>
-    </tr>
-    <tr>
-      <td>February</td>
-      <td>$80</td>
-    </tr>
-  </table>
+  <div class="container">
+    <div class="row margin-top-50">
+
+<!-- Below is the form created for all the drop downs-->
+
+      <form onclick="return false">
+        <div class="row option_center">
+          <h3>Search for your ideal event</h3>
+          
+        </div>
+        <div class="row option_center">
+          <p>Filter events by state, city and activity type</p>
+          <br>
+        </div>
+        <div class="row option_center">
+          <div class="col-sm-2">
+            <select class="custom-select mr-sm-2" id="selectDate">
+              <option selected>Select State</option>
+              <option value="date">All</option>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <select class="custom-select mr-sm-2" id="selectCity">
+              <option selected>Select City</option>
+              <option value="1">All</option>
+            </select>
+          </div>
+          <div class="col-sm-2"> 
+            <select class="custom-select mr-sm-2" id="selectState">
+              <option selected>Select Activity Type</option>
+              <option value="1">All</option>
+            </select>
+          </div>
+            <button type="submit" class="btn btn-primary" onclick="checkSited()">Submit</button>
+        </div>
+        <div class="row option_center">
+          <br>
+          <br>
+        </div>
+      </form>            
+        <div class="col-md-10">
+          <div id="table-area" class="">
+            <table id="event-table" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="table-head">Event Name</th>
+                  <th class="table-head">Attendees</th>
+                  <th class="table-head">Event Group</th>
+                  <th class="table-head">URL</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <span class="bottom">MeetUp Events</span>
+    </footer>
+  </div>
        
   <!-- D3 CDN -->
   <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -69,6 +115,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
   </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
+  <!-- UNCOMMENT IN FINAL -->
+
+  <!-- <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script> -->
 
 </body>
 
