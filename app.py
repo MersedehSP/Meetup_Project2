@@ -45,7 +45,8 @@ def markerMap(city='All'):
 
     session = Session(bind=engine)
     if (city=='All'):
-        results=session.query(meetupEvents.event_name, meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.venue_event_link, meetupEvents.attendees, meetupEvents.google_map_link).all()
+        results=session.query(meetupEvents.event_name, meetupEvents.event_lat, meetupEvents.event_lng, 
+            meetupEvents.venue_event_link, meetupEvents.attendees, meetupEvents.google_map_link).all()
         result_dict=[]
     else:
         results=session.query(meetupEvents.event_name, meetupEvents.event_lat,meetupEvents.event_lng, 
@@ -72,6 +73,7 @@ def citydropDown(state='All'):
     session = Session(bind=engine)
     if (state=='All'):
         results=session.query(meetupEvents.event_city).\
+            group_by(meetupEvents.event_city).\
             order_by(meetupEvents.event_city).all()
         result_dict=[]
         for city in results:
