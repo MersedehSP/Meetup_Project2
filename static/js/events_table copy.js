@@ -55,17 +55,24 @@ function loadOptions(){
         });
     });
 
-    function GetCityList() {
+    function GetCityList(selection) {
+        d3.json(`/citydropDown/',${xvalue}`).then(data)`)
         var x = document.getElementById("selectState");
         if (x.value == "NJ"){
+            selected = "/citydropDown/"
             tableData.forEach((data))=> {
                 Object.entries(data).forEach(([key,value])=>{
                     if (key=="state") {
-                        if(value=="NJ"){
+                        if(value=="NJ") {
+                            // Need to get to city key-value pairs
                             citylist.push(value);
                         }
+                    }
+                } 
             }
-    }};
+        }
+    }; 
+
     //console.log(citylist)
 // Load statelist into the state dropdown.
     statelist.sort();
