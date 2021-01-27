@@ -59,24 +59,24 @@
         </div>
         <div class="row option_center">
           <div class="col-sm-2">
-            <select class="custom-select mr-sm-2" id="selectDate">
+            <select class="custom-select mr-sm-2" id="selectState">
               <option selected>Select State</option>
-              <option value="date">All</option>
+              <option value="state">All</option>
             </select>
           </div>
           <div class="col-sm-2">
             <select class="custom-select mr-sm-2" id="selectCity">
               <option selected>Select City</option>
-              <option value="1">All</option>
+              <option value="city">All</option>
             </select>
           </div>
           <div class="col-sm-2"> 
-            <select class="custom-select mr-sm-2" id="selectState">
+            <select class="custom-select mr-sm-2" id="selectActivityType">
               <option selected>Select Activity Type</option>
-              <option value="1">All</option>
+              <option value="activitytype">All</option>
             </select>
           </div>
-            <button type="submit" class="btn btn-primary" onclick="checkSited()">Submit</button>
+            <button type="submit" class="btn btn-primary" onclick="checkEvent()">Submit</button>
         </div>
         <div class="row option_center">
           <br>
@@ -121,8 +121,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
 
   <!-- JS for Events Table -->
-  <script src="static/js/events_table.js"></script> -->
-
+  <script src="../static/js/data.js"></script>
+  <script src="../static/js/events_table.js"></script>
+  
 </body>
 
 </html>

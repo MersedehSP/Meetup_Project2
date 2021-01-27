@@ -33,7 +33,6 @@ function loadOptions(){
     
     //document.querySelector('select[name="NJ"]');
     //console.log("works")
-
     // Loop through data list and create dropdown options for each list above checking for unique values by calling the exist function
     tableData.forEach((data)=> {
         Object.entries(data).forEach(([key,value])=>{
@@ -56,6 +55,17 @@ function loadOptions(){
         });
     });
 
+    function GetCityList() {
+        var x = document.getElementById("selectState");
+        if (x.value == "NJ"){
+            tableData.forEach((data))=> {
+                Object.entries(data).forEach(([key,value])=>{
+                    if (key=="state") {
+                        if(value=="NJ"){
+                            citylist.push(value);
+                        }
+            }
+    }};
     //console.log(citylist)
 // Load statelist into the state dropdown.
     statelist.sort();
