@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 import psycopg2
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, url_for
 from flask_migrate import Migrate
 from models import db, meetupCity, meetupEvents
 from sqlalchemy.ext.automap import automap_base
@@ -23,6 +23,16 @@ engine=create_engine("postgresql://postgres:postgres@127.0.0.1:5432/Meetup")
 def home():
 
     return render_template('index.html')
+
+@app.route('/EventData')
+def EventData():
+
+    return render_template('EventData.html')
+
+@app.route('/EventFinder')
+def EventFinder():
+
+    return render_template('EventFinder.html')
 
 @app.route('/heatMap')
 def heatMap():
