@@ -20,7 +20,7 @@ var link = "/static/data/json_latlng.json";
 
 
   //Getting lat and lng json data
-  d3.json(link, function(response) {    
+  d3.json('/heatMap', function(response) {    
     var heatArray = [];
     for (var i = 0; i < Object.keys(response).length; i++) {
       var x = response[i];
