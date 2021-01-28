@@ -57,34 +57,28 @@
           <p>Filter events by state, city and activity type</p>
           <br>
         </div>
-        <div class="row option_center">
-          <div class="col-sm-2">
-            <select class="custom-select mr-sm-2" id="selectState" onchange="GetCityList(this.value)">
+        <div class="row">
+          <div class="column">
+            <select class="select mr-sm-2" id="selectState" onchange="GetCityList(this.value)">
               <option selected>Select State</option>
               <option value="state">All</option>
             </select>
-          </div>
-          <div class="col-sm-2">
-            <select class="custom-select mr-sm-2" id="selectCity">
+            <select class="select mr-sm-2" id="selectCity">
               <option selected>Select City</option>
               <option value="city">All</option>
             </select>
-          </div>
-          <div class="col-sm-2"> 
-            <select class="custom-select mr-sm-2" id="selectActivityType">
+            <select class="select mr-sm-2" id="selectActivityType">
               <option selected>Select Activity Type</option>
               <option value="activitytype">All</option>
             </select>
-          </div>
             <button type="submit" class="btn btn-primary" onclick="checkEvent()">Submit</button>
+          </div>
         </div>
-        <div class="row option_center">
-          <br>
-          <br>
-        </div>
-      </form>            
-        <div class="col-md-10">
-          <div id="table-area" class="">
+        <br>
+      </form>
+      <div class="table-container">          
+        <div class="column">
+          <div id="table-area" class="table-wrapper">
             <table id="event-table" class="table table-striped">
               <thead>
                 <tr>
