@@ -2,7 +2,7 @@
 // Use "complete_test_data.json" as a test data file, replace w/ actual
 // Uncomment the ActivityType sections 
 var tableData=data;
-
+console.log(tableData[0].event_name)
 function exist(list,string) {
 
     // Check for duplicate in list for dropdown
@@ -30,9 +30,6 @@ function loadOptions(){
     let statelist=[];
     let citylist=[];
     let activitytypelist=[];
-    
-    //document.querySelector('select[name="NJ"]');
-    //console.log("works")
 
     // Loop through data list and create dropdown options for each list above checking for unique values by calling the exist function
     tableData.forEach((data)=> {
