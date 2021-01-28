@@ -71,6 +71,8 @@ function loadOptions(){
     // loadSelect(activitytype,activitytypelist);
 }
 
+
+
 function loadtable(data) {
 
     // Create table according to data parameter
@@ -136,6 +138,12 @@ function checkEvent() {
 
     //Call readList function passing the input dictionary as an argument
     readList(criteria);
+}
+
+function GetCityList(value) {
+    var value=document.getElementById('selectState'); 
+    var state = value.options[value].value;
+    console.log("State :",state)
 }
 
 // Call loadOptions function which load all dropdowns for html.
