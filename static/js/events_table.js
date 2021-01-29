@@ -1,19 +1,3 @@
-// Get data from json 
-// Use "complete_test_data.json" as a test data file, replace w/ actual
-// Uncomment the ActivityType sections 
-var tableData=data;
-console.log(tableData[0].event_name)
-function exist(list,string) {
-
-    // Check for duplicate in list for dropdown
-    for(let x=0; x<list.length; x++) {
-        if (list[x]===string) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function clr_dropDown() {
     var select = document.getElementById("selectCity");
     var length = select.options.length;
@@ -23,34 +7,24 @@ function clr_dropDown() {
 }
 
 function loadSelect(obj,list) {
-    console.log("obj :",obj);
-    console.log("list :",list)
     // Load list into dropdown object 
-    let i=0;
-    list.forEach(function(item) {
-        i++;
-        obj.add(new Option(item,String(i)));
-    });
+    for (i=0;i<list.length;i++) {
+        obj.append(new Option(list[i],String(i)));
+    }
 }
 
 function GetCityList(value) {
     citylist=[];
 
-//    clr_dropDown();
+    clr_dropDown();
     var state = value.options[value.selectedIndex].text;
     let city=document.getElementById("selectCity");
     d3.json('/citydropDown/'+ state, function(response) {
-        response.forEach((city)=> {
-                 citylist.push(city);
-        });
+        for (x=0;x<response.length;x++) {
+            citylist.push(response[x].city);
+        }
+    loadSelect(city,citylist);
     });
-    let i=2;
-    citylist.forEach(function(item) {
-        i++;
-        city.add(new Option(item,String(i)));
-    });
-//    loadSelect(city,citylist);
-    console.log("citilist :",citylist);
 }
 
 
@@ -59,45 +33,34 @@ function loadOptions(){
     // Create the filter lists for the 3 dropdowns in html
     let statelist=[];
     let citylist=[];
-    let activitytypelist=[];
+    let categorylist=[];
 
-    // Loop through data list and create dropdown options for each list above checking for unique values by calling the exist function
-    tableData.forEach((data)=> {
-        Object.entries(data).forEach(([key,value])=>{
-            if (key=="state") {
-                if (exist(statelist,value)==false) {
-                    statelist.push(value);
-                }
-            }
-            if (key=="city") {
-                if (exist(citylist,value)==false) {
-                    citylist.push(value);
-                    //console.log(value);
-                }
-            }
-            // if (key=="activity") {
-            //     if (exist(activitytypelist,value)==false) {
-            //         activitytypelist.push(value);
-            //     }
-            // }
-        });
+// Load statelist into the state dropdown.    
+    let state=document.getElementById("selectState");
+    d3.json('/statedropDown', function(response) {  
+        for (x=0;x<response.length;x++) {
+            statelist.push(response[x].state);
+        }
+        loadSelect(state,statelist); 
     });
 
-    //console.log(citylist)
-// Load statelist into the state dropdown.
-    statelist.sort();
-    let state=document.getElementById("selectState");
-    loadSelect(state,statelist);
-
 // Load citylist into the city dropdown.
-    citylist.sort();
     let city=document.getElementById("selectCity");
-    loadSelect(city,citylist);
+    d3.json('/citydropDown', function(response) {  
+        for (x=0;x<response.length;x++) {
+            citylist.push(response[x].city);
+        }
+        loadSelect(city,citylist); 
+    });
 
-// Load activitytypelist into the date dropdown.
-    // activitytypelist.sort();
-    // let activitytype=document.getElementById("selectActivityType");
-    // loadSelect(activitytype,activitytypelist);
+// Load categorylist into the category dropdown.    
+    let category=document.getElementById("selectActivityType");
+    d3.json('/categorydropDown', function(response) {  
+        for (x=0;x<response.length;x++) {
+            categorylist.push(response[x].category);
+        }
+        loadSelect(category,categorylist); 
+    });
 }
 
 
@@ -124,8 +87,7 @@ function clearTbody() {
     tbodyRows.remove();
 }
 
-function readList(criteria) {
-    dataTable={};
+function readList() {
     let value=document.getElementById("selectState");
     let state=value.options[value.selectedIndex].text;
         value=document.getElementById("selectCity");
@@ -133,56 +95,36 @@ function readList(criteria) {
         value=document.getElementById("selectActivityType");
     let category=value.options[value.selectedIndex].text;
 
-    console.log("state :",state);
-    console.log("city :",city);
-    console.log("category:",category);
-    var route='/eventInfo/' + state + '/' + city + '/' + category;
-    console.log("Route :",route);
     // filter tableData according to criteria dictionary parameter.
+
     d3.json('/eventInfo/' + state + '/' + city + '/' + category , function(response) {
-        console.log("6 eventinfo selection: ",response)
-        
+        var tableData=[];
+        console.log("EventInfo :", response);
+        if (response.length>0) {
+            for (x=0;x<response.length;x++) {
+                record={}
+                record['name']=response[x].name;
+                record['attendee']=response[x].attendees
+                record['group']=response[x].group;
+                record['city']=response[x].city;
+                record['state']=response[x].state;
+                record['link']=response[x].link;
+                tableData.push(record);
+            }
+            // If found clear the table and load the table with newData passed as an argument
+                clearTbody();
+                loadtable(tableData);
+            } else {
+            // If no results found clear table if any and return
+                clearTbody();
+            }
     });
-   let newData=tableData.filter(event=>
-        (event.state===criteria.state || criteria.state==="All" || criteria.state==="Select State") &&
-        (event.city===criteria.city || criteria.city==="All" || criteria.city==="Select City") //&&
-        // (event.activitytype===criteria.activitytype || criteria.activitytype==="All" || criteria.activitytype==="Select Activity Type")
-    );
-
-    // Test to see if any results were found.
-    if (newData.length>0) {
-    
-    // If found clear the table and load the table with newData passed as an argument
-        clearTbody();
-        loadtable(newData);
-    } else {
-
-    // If no results found clear table if any and return
-        clearTbody();
-    }
-
 }
 
 function checkEvent() {
 
-    // Create a dictionary of input values from drop downs.
-
-    let criteria={};
-
-    let state = document.getElementById("selectState");
-    criteria.state=state.options[state.selectedIndex].text;
-
-    let city = document.getElementById("selectCity");
-    criteria.city=city.options[city.selectedIndex].text;
-
-    // let activitytype = document.getElementById("selectActivityType");
-    // criteria.activitytype=activitytype.options[activitytype.selectedIndex].text;
-
-    // Clear table
     clearTbody();
-
-    //Call readList function passing the input dictionary as an argument
-    readList(criteria);
+    readList();
 }
 
 // Call loadOptions function which load all dropdowns for html.
