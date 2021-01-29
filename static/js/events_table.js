@@ -14,15 +14,45 @@ function exist(list,string) {
     return false;
 }
 
-function loadSelect(obj,list) {
+function clr_dropDown() {
+    var select = document.getElementById("selectCity");
+    var length = select.options.length;
+    for (i = length-1; i >= 2; i--) {
+        select.remove(i);
+   }
+}
 
+function loadSelect(obj,list) {
+    console.log("obj :",obj);
+    console.log("list :",list)
     // Load list into dropdown object 
     let i=0;
     list.forEach(function(item) {
         i++;
-        obj.append(new Option(item,String(i)));
+        obj.add(new Option(item,String(i)));
     });
 }
+
+function GetCityList(value) {
+    citylist=[];
+
+//    clr_dropDown();
+    var state = value.options[value.selectedIndex].text;
+    let city=document.getElementById("selectCity");
+    d3.json('/citydropDown/'+ state, function(response) {
+        response.forEach((city)=> {
+                 citylist.push(city);
+        });
+    });
+    let i=2;
+    citylist.forEach(function(item) {
+        i++;
+        city.add(new Option(item,String(i)));
+    });
+//    loadSelect(city,citylist);
+    console.log("citilist :",citylist);
+}
+
 
 function loadOptions(){
 
@@ -62,7 +92,6 @@ function loadOptions(){
 // Load citylist into the city dropdown.
     citylist.sort();
     let city=document.getElementById("selectCity");
-
     loadSelect(city,citylist);
 
 // Load activitytypelist into the date dropdown.
@@ -96,9 +125,23 @@ function clearTbody() {
 }
 
 function readList(criteria) {
-    
+    dataTable={};
+    let value=document.getElementById("selectState");
+    let state=value.options[value.selectedIndex].text;
+        value=document.getElementById("selectCity");
+    let city=value.options[value.selectedIndex].text;
+        value=document.getElementById("selectActivityType");
+    let category=value.options[value.selectedIndex].text;
+
+    console.log("state :",state);
+    console.log("city :",city);
+    console.log("category:",category);
     // filter tableData according to criteria dictionary parameter.
-    let newData=tableData.filter(event=>
+    d3.json('/eventInfo/' + state + '/' + city + '/' + category , function(response) {
+        console.log("6 eventinfo selection: ",response)
+        
+    });
+   let newData=tableData.filter(event=>
         (event.state===criteria.state || criteria.state==="All" || criteria.state==="Select State") &&
         (event.city===criteria.city || criteria.city==="All" || criteria.city==="Select City") //&&
         // (event.activitytype===criteria.activitytype || criteria.activitytype==="All" || criteria.activitytype==="Select Activity Type")
@@ -140,15 +183,8 @@ function checkEvent() {
     readList(criteria);
 }
 
-function GetCityList(value) {
-    var value=document.getElementById('selectState'); 
-    var state = value.options[value].value;
-    console.log("State :",state)
-}
-
 // Call loadOptions function which load all dropdowns for html.
 loadOptions();
 
 // Initial call to checkEvent function to load all dates into the table.
 checkEvent();
-
