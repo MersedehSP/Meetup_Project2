@@ -136,6 +136,8 @@ function readList(criteria) {
     console.log("state :",state);
     console.log("city :",city);
     console.log("category:",category);
+    var route='/eventInfo/' + state + '/' + city + '/' + category;
+    console.log("Route :",route);
     // filter tableData according to criteria dictionary parameter.
     d3.json('/eventInfo/' + state + '/' + city + '/' + category , function(response) {
         console.log("6 eventinfo selection: ",response)
