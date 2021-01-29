@@ -117,14 +117,14 @@ def dataTable(state='All', city='All',category='All'):
     if (state=='All' and city=='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state,meetupCity.city).\
                 join(meetupCity).\
                 order_by(meetupCity.city).all()         
 
     elif (state!='All' and city=='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupCity.state==state).\
                 order_by(meetupCity.city).all()
@@ -132,7 +132,7 @@ def dataTable(state='All', city='All',category='All'):
     elif (state!='All' and city!='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupCity.state==state and meetupCity.city==city).\
                 order_by(meetupCity.city).all()
@@ -140,15 +140,16 @@ def dataTable(state='All', city='All',category='All'):
     elif (state!='All' and city!='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address,meetupCity.state, meetupCity.city).\
                 join(meetupCity, meetupCity.id==meetupEvents.city_id).\
                 filter(meetupCity.state==state and meetupCity.city==city and meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
 
+
     elif (state=='All' and city!='All' and category=='All'):  
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupCity.city==city).\
                 order_by(meetupCity.city).all() 
@@ -156,7 +157,7 @@ def dataTable(state='All', city='All',category='All'):
     elif (state=='All' and city!='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupCity.city==city and meetupEvents.category==category).\
                 order_by(meetupCity.city).all() 
@@ -164,7 +165,7 @@ def dataTable(state='All', city='All',category='All'):
     elif (state=='All' and city=='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
@@ -172,14 +173,14 @@ def dataTable(state='All', city='All',category='All'):
     elif (state!='All' and city=='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
                 filter(meetupCity==city and meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
 
 
     result_dict=[]
-    for name, group, attendees, cat_gry, link, street, gmap, lat, lng, address in results:
+    for name, group, attendees, cat_gry, link, street, gmap, lat, lng, address,state, city in results:
         record={}
         record['name']=name
         record['group']=group

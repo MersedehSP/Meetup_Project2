@@ -130,5 +130,5 @@ function checkEvent() {
 // Call loadOptions function which load all dropdowns for html.
 loadOptions();
 
-// Initial call to checkEvent function to load all dates into the table.
+// Initial call to checkEvent function to load the table.
 checkEvent();
