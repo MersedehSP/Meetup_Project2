@@ -1,13 +1,11 @@
 # Meetup_Project2
-# Project Title
+# Find your Crew!
 
-One Paragraph of project description goes here
+It's always fun to find friends with hobbies you enjoy, but this is especially true in the time of the COVID-19 pandemic. We wanted to provide those living in the tri-state area (New Jersey, New York and Pennsylvania) with safe, socially-distanced, in-person events to attend and hopefully forge meaningful connections. MeetUp.com is a great resource to find events to attend, and the goal of this project was to make it easier and faster to find relevant events near you. This was a fantastic challenge in developing a full-stack application using several techniques such as web scraping, the ETL process to create a useful dataset, storing the dataset in a SQL database, creating a Flask API to source specific data elements to enable interactive heatmap, marker map and data table visualizations on the web.
 
-## Getting Started
+## How we built this application
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
+### Web Scraping MeetUp.com
 
 What things you need to install the software and how to install them
 
@@ -15,7 +13,7 @@ What things you need to install the software and how to install them
 Give examples
 ```
 
-### Installing
+### Getting the latitude and longitude for target locations
 
 A step by step series of examples that tell you how to get a development env running
 
