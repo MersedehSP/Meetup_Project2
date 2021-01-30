@@ -170,10 +170,6 @@ def dataTable(state='All', city='All',category='All'):
                 order_by(meetupCity.city).all()
 
     elif (state!='All' and city=='All' and category!='All'):
-#        results=session.query(meetupEvents).\
-#            join(meetupCity, meetupCity.id==meetupEvents.city_id).\
-#            filter(meetupEvents.category==category)
-#        print("RESULTS :", results)
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
              meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
