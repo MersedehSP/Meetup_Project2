@@ -1,35 +1,50 @@
-var filtered_lst = [];
+var cityLayer;
+var eventsLayer;
+
+getData();
 
 function getData(){
-
+  var tableData=[];
   var category_element = document.getElementById('selectCategory');
-  var op = category_element.options[category_element.selectedIndex].text;
+  var category = category_element.options[category_element.selectedIndex].text;
 
   var state_elem = document.getElementById('selectState');
-  var state_op = state_elem.options[state_elem.selectedIndex].text;
+  var state = state_elem.options[state_elem.selectedIndex].text;
 
   var city_elem = document.getElementById('selectCity');
-  var city_op = city_elem.options[city_elem.selectedIndex].text;
-
-  
-  if (op === "All" && state_op === "All" && city_op === "All"){
-    filtered_lst = data
-  }
-  else{
-    filtered_lst = data.filter(obj => obj.category === op);
-  }
-  
-  console.log(filtered_lst);
-  return filtered_lst
-
+  var city = city_elem.options[city_elem.selectedIndex].text;
+  d3.json('/eventInfo/' + state + '/' + city + '/' + category , function(response) {
+    console.log("EventInfo :", response);
+    if (response.length>0) {
+        for (x=0;x<response.length;x++) {
+            // record={}
+            // record['name']=response[x].name;
+            // record['street']=response[x].street;
+            // record['gmap']=response[x].gmap;
+            // record['category']=response[x].category;
+            // record['lat']=response[x].lat;
+            // record['lng']=response[x].lng;
+            // record['attendee']=response[x].attendees;
+            // record['group']=response[x].group;
+            // record['city']=response[x].city;
+            // record['state']=response[x].state;
+            // record['link']=response[x].link;
+            tableData.push(response[x])
+            //tableData.push(record);
+         }
+      }
+    var data = tableData;
+    return data;
+    });
 }
 
-var incoming_data = getData()
-
+var incoming_data = getData();
+console.log("Incoming: ",incoming_data);
+console.log("Length :",incoming_data.length);
 // Once we get a response, send the data.features object to the createFeatures function
-var cityLayer = createFeatures(incoming_data);
-var eventsLayer = createEventMarkers(incoming_data);
-// console.log(cityLayer)
+cityLayer = createFeatures(incoming_data);
+eventsLayer = createEventMarkers(incoming_data);
+console.log("Events Layer :",eventsLayer);
 
 // Streetmap Layer
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -68,15 +83,17 @@ var baseMaps = {
 };
  
 var overlayMaps = {
-  Cities: cityLayer,
+//  Cities: cityLayer,
   Events: eventsLayer
 };
 
 var myMap = L.map("map", {
-  center: [41.408969, -75.6624122],
-  zoom: 8,
-  layers: [streetmap, cityLayer],
-  layers: [streetmap, eventsLayer, cityLayer]
+ center: [41.408969, -75.6624122],
+ zoom: 8,
+ layers: [streetmap, cityLayer],
+ layers: [streetmap, eventsLayer, cityLayer]
+// layers: [streetmap, eventsLayer]
+
 });
 
 
@@ -85,29 +102,28 @@ controller = L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
 
 
-
 function createFeatures(cities) {
-  console.log(`cities : ${cities}`)
+  // console.log(`cities : ${cities}`)
 
-  if (myMap){
-    myMap.removeLayer(cityLayer)
-    console.log("Layers: ", cityLayer)
-  }
+  // if (myMap){
+  //   myMap.removeLayer(cityLayer)
+  //   console.log("Layers: ", cityLayer)
+  // }
   
-  // An array which will be used to store created cityMarkers
-  var cityMarkers = [];
+  // // An array which will be used to store created cityMarkers
+  // var cityMarkers = [];
 
-  for (var i = 0; i < cities.length; i++) {
-    console.log(cities[i].city)
-    // loop through the cities array, create a new marker, push it to the cityMarkers array
-    cityMarkers.push(
-      L.marker([cities[i].city_lat, cities[i].city_lng]).bindPopup(`<h4> ${cities[i].city} </h4>`)
-    );
+  // for (var i = 0; i < cities.length; i++) {
+  //   console.log(cities[i].city)
+  //   // loop through the cities array, create a new marker, push it to the cityMarkers array
+  //   cityMarkers.push(
+  //     L.marker([cities[i].city_lat, cities[i].city_lng]).bindPopup(`<h4> ${cities[i].city} </h4>`)
+  //   );
   
     
-  }
-  cityLayer = L.layerGroup(cityMarkers);
-  return cityLayer
+  // }
+  // cityLayer = L.layerGroup(cityMarkers);
+  // return cityLayer
  
 
 }
@@ -140,16 +156,20 @@ function decideIcon(category){
     case "Food & Drink":
       customMarker = coffeeMarker;
       break;
+    default:
+      customMarker = coffeeMarker;
   }
 
   return customMarker;
   
 }
 
+var myMap;
 
 // Function to create the markers for events overlay
 function createEventMarkers(events) {
-  console.log(`events : ${events}`)
+  console.log('events inside :', events);
+  console.log('event length :',events.length);
 
   if (myMap){
     myMap.removeLayer(eventsLayer)
@@ -162,17 +182,17 @@ function createEventMarkers(events) {
   
 
   for (var i = 0; i < events.length; i++) {
-    console.log(events[i].city)
+    // console.log('*******',events[i]);
 
     var custom_marker = decideIcon(events[i].category);
-    console.log(custom_marker);
+    console.log("Marker :",events[i].category);
 
     // loop through the cities array, create a new marker, push it to the cityMarkers array
     eventMarkers.push(
-      L.marker([events[i].event_lat, events[i].event_lng], {icon: custom_marker}).bindPopup(`<h4 
+      L.marker([events[i].lat, events[i].lng], {icon: custom_marker}).bindPopup(`<h4 
         style="font-size:12px;background-image: linear-gradient(100deg,grey,white, grey);"> 
-          <a href=${events[i].Google_Map_Link} target="_blank" style="padding: 5px;color:#000000;text-align:center;"><b><center style="padding: 0 15px 0 15px;">${events[i].event_name}</center></b></a></br>
-          <p><center style="box-shadow:0 1px 1px 1px #888888;padding: 5px;"><a href=${events[i].Google_Map_Link} target="_blank" style="padding: 5px;">${events[i].event_street}</br>${events[i].city}, ${events[i].state}</a> </center></p>
+          <a href=${events[i].link} target="_blank" style="padding: 5px;color:#000000;text-align:center;"><b><center style="padding: 0 15px 0 15px;">${events[i].name}</center></b></a></br>
+          <p><center style="box-shadow:0 1px 1px 1px #888888;padding: 5px;"><a href=${events[i].gmap} target="_blank" style="padding: 5px;">${events[i].street}</br>${events[i].city}, ${events[i].state}</a> </center></p>
           <p><center style="padding: 5px;">${events[i].attendees} attendee(s)</center></p>
         </h4>`)
     );
@@ -186,7 +206,7 @@ function createEventMarkers(events) {
 }
 
 
-function changeFunc(){
+function checkEvent(){
   // Get the new filtered data based on the user input ( drop downs)
   var incoming_data = getData();
 
@@ -209,6 +229,5 @@ function changeFunc(){
   myMap.addLayer(eventsLayer);
 
   // Create teh controller with the new overlay
-  controller = L.control.layers(baseMaps, overlayMaps).addTo(myMap);
-  
+  controller = L.control.layers(baseMaps, overlayMaps).addTo(myMap); 
 }

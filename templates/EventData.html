@@ -19,6 +19,7 @@
 </head>
 
 <body>
+<div class="eventdata-container">
   <!-- Navigation Bar on Top Right -->
   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
     <a class="navbar-brand" href="{{url_for('home')}}">Home Page</a>
@@ -71,7 +72,6 @@
             <button type="submit" class="btn btn-primary" onclick="checkEvent()">Submit</button>
           </div>
         </div>
-        <br>
       </form>
       <div class="table-container">          
         <div class="column">
@@ -96,7 +96,7 @@
     <footer class="footer">
       <span class="bottom">MeetUp Events</span>
     </footer>
-<!--  </div>-->
+  </div>
        
   <!-- D3 CDN -->
   <script src="https://d3js.org/d3.v4.min.js"></script>

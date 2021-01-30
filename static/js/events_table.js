@@ -63,8 +63,6 @@ function loadOptions(){
     });
 }
 
-
-
 function loadtable(data) {
 
     // Create table according to data parameter
