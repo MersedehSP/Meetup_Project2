@@ -5,14 +5,19 @@ It's always fun to find friends with hobbies you enjoy, but this is especially t
 
 ## How we built this application
 
+### Web scraped [MeetUp.com](https://www.meetup.com/) and got all the events taking place in tri-state area
+### Sourced latitude and longitude of the event cities and event locations from [OpenCage API](https://opencagedata.com/api)
+### Created a python-based script to automate the clean-up, restructuring and rendering of the scraped dataset
+### Transformed and loaded data to [SQL database](https://www.postgresql.org/)
+### Created a Flask API to access the database and pull data on-demand based on options selected by users
+### Used the datasets sourced from Flask API to make the JavaScript visualizations:
+Heatmap showing all events in the tri-state area - Used [Mapbox API](https://docs.mapbox.com/api/overview/) and [Leaflet JS](https://leafletjs.com/)
+Marker map with layers showing events by event category type and city - Used 
+Data table with state, city and event category filters
+### Displayed the visualizations on a HTML webpage
+
+
 ### Web Scraping MeetUp.com
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
 ### Getting the latitude and longitude for target locations
 
 A step by step series of examples that tell you how to get a development env running
