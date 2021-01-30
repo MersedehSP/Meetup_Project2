@@ -42,11 +42,11 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Brian Regan** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Joseph Lubrano** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Mersedeh Saniepay** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Veena Uppalapati** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Ramyata Upmaka** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Brian Regan** - *Initial work* - [GitHub](https://github.com/bregan78)
+* **Joseph Lubrano** - *Initial work* - [GitHub](https://github.com/PurpleBooth)
+* **Mersedeh Saniepay** - *Initial work* - [GitHub](https://github.com/MersedehSP)
+* **Veena Uppalapati** - *Initial work* - [GitHub](https://github.com/PurpleBooth)
+* **Ramyata Upmaka** - *Initial work* - [GitHub](https://github.com/rambunctious2050)
 
 ## Acknowledgments
 
