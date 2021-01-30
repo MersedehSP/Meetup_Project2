@@ -42,11 +42,11 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Brian Regan** - *Initial work* - [bregan78](https://github.com/bregan78)
-* **Joseph Lubrano** - *Initial work* - [jlubranos](https://github.com/jlubranos)
-* **Mersedeh Saniepay** - *Initial work* - [MersedehSP](https://github.com/MersedehSP)
-* **Veena Uppalapati** - *Initial work* - [veenauppalapati](https://github.com/veenauppalapati)
-* **Ramyata Upmaka** - *Initial work* - [rambunctious2050](https://github.com/rambunctious2050)
+* **Brian Regan** - *Data sourcing (API)* - [bregan78](https://github.com/bregan78)
+* **Joseph Lubrano** - *SQL database, Flask, visualizations* - [jlubranos](https://github.com/jlubranos)
+* **Mersedeh Saniepay** - *Data cleaning and restructuring, SQL database* - [MersedehSP](https://github.com/MersedehSP)
+* **Veena Uppalapati** - *Data sourcing (web scraping) and visualizations* - [veenauppalapati](https://github.com/veenauppalapati)
+* **Ramyata Upmaka** - *Visualizations, webpage* - [rambunctious2050](https://github.com/rambunctious2050)
 
 ## Acknowledgments
 
