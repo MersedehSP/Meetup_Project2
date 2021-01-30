@@ -178,7 +178,7 @@ def dataTable(state='All', city='All',category='All'):
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
              meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity, meetupCity.id==meetupEvents.city_id).\
-                filter(meetupCity.city==city, meetupEvents.category==category).\
+                filter(meetupCity.state==state, meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
 
 
