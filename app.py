@@ -1,12 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 import psycopg2
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, url_for
 from flask_migrate import Migrate
 from models import db, meetupCity, meetupEvents
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, inspect, func
+from sqlalchemy import create_engine, inspect, func, and_
 
 app = Flask(__name__)
  
@@ -23,6 +23,16 @@ engine=create_engine("postgresql://postgres:postgres@127.0.0.1:5432/Meetup")
 def home():
 
     return render_template('index.html')
+
+@app.route('/EventFinder')
+def EventFinder():
+
+    return render_template('EventFinder.html')
+
+@app.route('/EventData')
+def EventData():
+
+    return render_template('EventData.html')
 
 @app.route('/heatMap')
 def heatMap():
@@ -82,85 +92,101 @@ def categorydropDown():
     session.close()
     return jsonify(result_dict)
 
+@app.route('/statedropDown')
+def statedropDown():
+
+    session = Session(bind=engine)
+    results=session.query(meetupCity.state).\
+        group_by(meetupCity.state).\
+        order_by(meetupCity.state).all()
+    result_dict=[]
+    for category in results:
+        record={}
+        record['state']=category
+        result_dict.append(record)
+    session.close()
+    return jsonify(result_dict)
+
+
 @app.route('/eventInfo')
 @app.route('/eventInfo/<state>/<city>/<category>')
 def dataTable(state='All', city='All',category='All'):
 
     session = Session(bind=engine)
-
     if (state=='All' and city=='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state,meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
                 order_by(meetupCity.city).all()         
 
     elif (state!='All' and city=='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
                 filter(meetupCity.state==state).\
                 order_by(meetupCity.city).all()
 
     elif (state!='All' and city!='All' and category=='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
                 join(meetupCity).\
-                filter(meetupCity.state==state and meetupCity.city==city).\
+                filter(meetupCity.state==state, meetupCity.city==city).\
                 order_by(meetupCity.city).all()
 
     elif (state!='All' and city!='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
-                filter(meetupCity.state==state and meetupCity.city==city and meetupEvents.category==category).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address,meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
+                filter(meetupCity.state==state, meetupCity.city==city, meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
+
 
     elif (state=='All' and city!='All' and category=='All'):  
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
                 filter(meetupCity.city==city).\
                 order_by(meetupCity.city).all() 
 
     elif (state=='All' and city!='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
-                filter(meetupCity.city==city and meetupEvents.category==category).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
+                filter(meetupCity.city==city, meetupEvents.category==category).\
                 order_by(meetupCity.city).all() 
 
     elif (state=='All' and city=='All' and category!='All'):   
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
                 filter(meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
 
-    elif (state!='All' and city=='All' and category!='All'):   
+    elif (state!='All' and city=='All' and category!='All'):
         results=session.query(meetupEvents.event_name, meetupEvents.group_name, meetupEvents.attendees,
              meetupEvents.category, meetupEvents.venue_event_link, meetupEvents.event_street, meetupEvents.google_map_link,
-             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address).\
-                join(meetupCity).\
-                filter(meetupCity==city and meetupEvents.category==category).\
+             meetupEvents.event_lat, meetupEvents.event_lng, meetupEvents.address, meetupCity.state, meetupCity.city).\
+                join(meetupCity, meetupCity.id==meetupEvents.city_id).\
+                filter(meetupCity.state==state, meetupEvents.category==category).\
                 order_by(meetupCity.city).all()
 
 
     result_dict=[]
-    for name, group, attendees, cat_gry, link, street, gmap, lat, lng, address in results:
+    for name, group, attendees, category, link, street, gmap, lat, lng, address, state, city in results:
         record={}
         record['name']=name
         record['group']=group
         record['attendees']=attendees
         record['city']=city
         record['state']=state
-        record['category']=cat_gry
+        record['category']=category
         record['link']=link
         record['street']=street
         record['gmap']=gmap
