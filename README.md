@@ -14,7 +14,7 @@ It's always fun to find friends with hobbies you enjoy, but this is especially t
   * Heatmap showing all events in the tri-state area - Used [Mapbox API](https://docs.mapbox.com/api/overview/) and [Leaflet JS](https://leafletjs.com/)
   * Marker map with layers showing events by event category type and city - Used 
   * Data table with state, city and event category filters
-### Displayed the visualizations on a HTML webpage
+* Displayed the visualizations on a HTML webpage
 
 ## Running the tests
 
