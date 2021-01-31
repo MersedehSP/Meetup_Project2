@@ -28,6 +28,17 @@ html {
   padding-bottom:0px;
 }
 
+.index-heading-container {
+  border-radius:.25em;
+  text-align:center;
+  background-color:white;
+  color:black;
+  line-height:1pt;
+  width:600px;
+  opacity:.9;
+  margin-top:0px;
+}
+
 .heading-container {
   border-radius:.25em;
   text-align:center;
@@ -72,7 +83,10 @@ html {
 /* Control the right side */
 .right {
   right: 0;
-  background-color: aquamarine;
+  background-image:url("../images/nature.jpg");
+  background-repeat:no-repeat;
+  background-position: center center;
+/*  background-color: aquamarine;*/
 }
 
 /* If you want the content centered horizontally and vertically */

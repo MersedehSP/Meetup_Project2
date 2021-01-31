@@ -97,10 +97,9 @@ function readList() {
 
     d3.json('/eventInfo/' + state + '/' + city + '/' + category , function(response) {
         var tableData=[];
-        console.log("EventInfo :", response);
         if (response.length>0) {
             for (x=0;x<response.length;x++) {
-                record={}
+                record={};
                 record['name']=response[x].name;
                 record['attendee']=response[x].attendees
                 record['group']=response[x].group;
@@ -110,11 +109,11 @@ function readList() {
                 tableData.push(record);
             }
             // If found clear the table and load the table with newData passed as an argument
-                clearTbody();
-                loadtable(tableData);
-            } else {
-            // If no results found clear table if any and return
-                clearTbody();
+            clearTbody();
+            loadtable(tableData);
+        } else {
+        // If no results found clear table if any and return
+            clearTbody();
             }
     });
 }
