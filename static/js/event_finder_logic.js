@@ -74,7 +74,6 @@ function getData(callback){
   getDropDownValues();
 
   d3.json('/eventInfo/' + state + '/' + city + '/' + category, function (response) {
-    console.log("EventInfo :", response);
     var jsonObjArray = [];
     for (var x = 0; x < response.length; x++) {
       jsonObjArray.push(response[x])
@@ -109,9 +108,7 @@ function getDataForOnClick(callback){
 function initialMapCallBack(result){
   // code that depends on result
   eventsLayer = createEventMarkers(result);
-  console.log(`events Layer: ${eventsLayer}`); 
   
-   
   overlayMaps = {
     Events: eventsLayer
   };
@@ -132,7 +129,6 @@ function onClickMyCallBack(result){
   // code that depends on result
   
   eventsLayer = createEventMarkers(result);
-  console.log(`events Layer: ${eventsLayer}`);
 
   overlayMaps = {
     Events: eventsLayer
