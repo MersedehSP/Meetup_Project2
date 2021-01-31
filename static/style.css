@@ -1,0 +1,17 @@
+body {
+    background-image:url("../static/images/meetupBackground.png");
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+   }
+
+.container {
+    position:relative;
+    height:auto;
+    width:auto;
+    padding:0px;
+    margin:0px;
+    background-color: black;
+    text-align:center;
+    color:blue;
+}

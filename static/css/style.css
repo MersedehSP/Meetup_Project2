@@ -9,10 +9,13 @@ html {
   height: 100%;
 }
 
+
 .eventdata-container {
   background-image:url("../images/nature.jpg");
   background-repeat:no-repeat;
   background-position: center center;
+  width:100%;
+  height:100%;
   }
 
 .container {
