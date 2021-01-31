@@ -245,8 +245,7 @@ function createEventMarkers(events) {
   for (var i = 0; i < events.length; i++) {
 
     var custom_marker = decideIcon(events[i].category);
-    
-    console.log('Gmap:', events[i].gmap)
+
     // loop through the cities array, create a new marker, push it to the cityMarkers array
     eventMarkers.push(
       L.marker([events[i].lat, events[i].lng], {icon: custom_marker}).bindPopup(`<h4 

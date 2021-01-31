@@ -36,7 +36,7 @@ var socialMarker = L.AwesomeMarkers.icon({
     icon: 'group', 
     prefix: 'fa',
     markerColor: 'darkgreen',
-    iconColor: '#ADFF2F'
+    iconColor: '#FFFF00'
 });
 
 var LGBTQMarker = L.AwesomeMarkers.icon({
