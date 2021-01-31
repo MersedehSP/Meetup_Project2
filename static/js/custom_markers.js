@@ -45,7 +45,7 @@ var LGBTQMarker = L.AwesomeMarkers.icon({
 var techMarker = L.AwesomeMarkers.icon({
     icon: 'desktop', 
     prefix: 'fa',
-    markerColor: 'yellow'
+    markerColor: 'purple'
   });
 
 
