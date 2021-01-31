@@ -63,7 +63,6 @@ function getDropDownValues(){
   city = city_elem.options[city_elem.selectedIndex].text;
 }
 
-
 getData(initialMapCallBack);
 
 // -------------------------------
@@ -116,9 +115,9 @@ function initialMapCallBack(result){
   myMap = L.map("map", {
     center: [41.408969, -75.6624122],
     zoom: 8,
-    layers: [streetmap, eventsLayer]
-  
+    layers: [dark, eventsLayer] 
   });
+
   controller = L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 }
 
@@ -173,7 +172,52 @@ function decideIcon(category) {
       customMarker = techMarker;
       break;
     case "Food & Drink":
-      customMarker = coffeeMarker;
+      customMarker = drinkMarker;
+      break;
+    case "Writing":
+      customMarker = writingMarker;
+      break;
+    case "Outdoors & Adventure":
+      customMarker = oudoorMarker;
+      break;
+    case "Book Clubs":
+      customMarker = bookMarker;
+      break;
+    case "Learning":
+      customMarker = learningMarker;
+      break;
+    case "Career & Business":
+      customMarker = careerMarker;
+      break;
+    case "Health & Wellness":
+      customMarker = healthMarker;
+      break;
+    case "Language & Culture":
+      customMarker = cultureMarker;
+      break;
+    case "Sports & Fitness":
+      customMarker = fitnessMarker;
+      break;
+    case "Pets":
+      customMarker = petsMarker;
+      break;
+    case "Sci-Fi & Games":
+      customMarker = gamesMarker;
+      break;
+    case "Movements":
+      customMarker = movementsMarker;
+      break;
+    case "Beliefs":
+      customMarker = beliefsMarker;
+      break;
+    case "Hobbies & Crafts":
+      customMarker = craftsMarker;
+      break;
+    case "Arts":
+      customMarker = artsMarker;
+      break;
+    case "Dance":
+      customMarker = danceMarker;
       break;
     default:
       customMarker = coffeeMarker;
