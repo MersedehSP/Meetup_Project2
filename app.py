@@ -10,14 +10,14 @@ from sqlalchemy import create_engine, inspect, func, and_
 
 app = Flask(__name__)
  
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@127.0.0.1:5432/Meetup"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:datachemistry@127.0.0.1:5432/MeetUp"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 db.init_app(app)
 migrate = Migrate(app, db)
 
-engine=create_engine("postgresql://postgres:postgres@127.0.0.1:5432/Meetup") 
+engine=create_engine("postgresql://postgres:datachemistry@127.0.0.1:5432/MeetUp") 
 
 @app.route('/')
 def home():
