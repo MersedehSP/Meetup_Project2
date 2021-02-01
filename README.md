@@ -46,7 +46,7 @@ CREATE TABLE events (
 );
 
 ```
-3. Load the following two .csv files into Postgresql in this order: region.csv, events.csv
+3. Load the following two .csv files into Postgresql in this order: region_final.csv, events_final.csv
 
 4. Open the app.py file and enter your Postgres password to configure the app and create the engine
 ```
