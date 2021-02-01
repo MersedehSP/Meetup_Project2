@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Find Your Crew</title>
+
+  <!-- Boostrap Stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+  <!-- Our own CSS stylesheet -->
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="icon" href="../static/images/meetupIcon.png" type="image/png" sizes="16x16">
+
+</head>
+
+<body>
+  <!-- Navigation Bar on Top Right -->
+  
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <a class="navbar-brand" href="{{url_for('home')}}">Home Page</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbars">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('EventFinder')}}">Event Finder</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('EventData')}}">Events Data</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="split left">
+    <div class="centered">
+      <img src="../static/images/meetuplogo.png" alt="MeetUpLogo" width="110" height="100">
+      <h1 class ="text-center">MeetUp Events in the Tri-State</h1>
+      <h3 class ="text-center">New York, New Jersey and Pennsylvania are full of fun activities!</h3>
+      <p class ="text-center"> Go to "Event Finder" to locate activities of specific interest to you.</p>
+      <p class ="text-center"> Go to "Events Data" to get more details about events that match your specifications.</p>
+    </div>
+  </div>
+  <div class="split right">
+    <div class="centered">
+      <div class="index-heading-container">
+        <h3>"In Person" MeetUp Events in the Tri-State</h3>
+      </div>
+      <div id="map" style="width: 600px; height: 400px"></div>
+    </div>
+  </div>
+   
+  <!-- API key -->
+  <script type="text/javascript" src="../static/js/config.js"></script> 
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+  <!-- D3 CDN -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+  </script>
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+  </script>
+  <!-- JS Heatmap  -->
+  <script type="text/javascript" src="../static/js/heatmap.js"></script>
+  <!-- Leaflet heatmap plugin-->
+  <script type="text/javascript" src="../static/js/leaflet-heat.js"></script>
+</body>
+</html>

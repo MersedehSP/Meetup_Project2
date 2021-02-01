@@ -1,0 +1,48 @@
+/* remove default margin and padding from body */
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width:100%;
+  }
+  
+  .map-wrapper {
+    position: relative;
+    height: 93%;
+    width: 100%;
+  }
+  
+  /* set map, body, and html to 100% of the screen size */
+  #map {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin-top: 55px;
+    vertical-align: middle;
+  }
+  
+  .filter-container{
+    position: absolute;
+    z-index:20000;
+    right: 5vw;
+    left: 5vw;
+    width: auto;
+    height: 1vw;
+    padding: 20px;
+    
+  }
+  .layer-picker {
+    padding:5px;
+    width: 10vw;
+    margin-top:40px;
+    /* margin: 5px; */
+    color: black;
+  }
+  
+  .search-button {
+    padding:5px;
+    width:8vw;
+    /* background-color: green; */
+    color:white;
+    /* margin: 5px; */
+  } 
