@@ -1,0 +1,35 @@
+.container-fluid > div {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-size: 2em;
+    /* color: #ffffff; */
+  }
+  
+  html, body {
+    box-sizing: border-box;
+    background-color: #90dfff;
+    height: 100%;
+    padding: 10px;
+    margin: 0px;
+  }
+
+  
+  .header {
+    background-color: #525252;
+    text-align: left;
+    border-bottom: rgb(226, 226, 226) 3px solid;
+  }
+  
+  .content {
+    background-color: #d6f2fd;
+  }
+  
+  .menu {
+    background-color:#90dfff;
+
+  }
+  
+  .footer {
+    background-color: #525252;
+  }
