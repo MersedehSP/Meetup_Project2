@@ -2,6 +2,8 @@
 
 It's always fun to find friends with hobbies you enjoy, but this is especially true in the time of the COVID-19 pandemic. We wanted to provide those living in the tri-state area (New Jersey, New York and Pennsylvania) with safe, socially-distanced, in-person events to attend and hopefully forge meaningful connections. MeetUp.com is a great resource to find events to attend, and the goal of this project was to make it easier and faster to find relevant events near you. This was a fantastic challenge in developing a full-stack application using several techniques such as web scraping, the ETL process to create a useful dataset, storing the dataset in a SQL database, creating a Flask API to source specific data elements to enable interactive heatmap, marker map and data table visualizations on the web.
 
+![demo.mp4](video/demo.mp4)
+
 ## How we built this application
 
 * Web scraped [MeetUp.com](https://www.meetup.com/) and got all the events taking place in tri-state area
