@@ -4,8 +4,7 @@ It's always fun to find friends with hobbies you enjoy, but this is especially t
 
 ## How we built this application
 
-* Web scraped [MeetUp.com](https://www.meetup.com/) and got all the events taking place in tri-state area. 
-*The application can be more powerful by using the MeetUp API which can be accessed using a MeetUp Pro account. Since we did not have a pro account, we decided to web scrape the data for the purposes of this project.
+* Web scraped [MeetUp.com](https://www.meetup.com/) and got all the events taking place in tri-state area. The application will be more powerful by using the MeetUp API which can be accessed using a MeetUp Pro account. We did not have a pro account and decided to web scrape the data for the purposes of this project.
 * Sourced latitude and longitude of the event cities and event locations from [OpenCage API](https://opencagedata.com/api)
 * Created a python-based script to automate the clean-up, restructuring and rendering of the scraped dataset
 * Transformed and loaded data to [SQL database](https://www.postgresql.org/)
